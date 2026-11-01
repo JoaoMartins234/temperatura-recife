@@ -66,6 +66,18 @@
     }
     .emergencia p { margin: 0.4rem 0; font-size: 0.95rem; }
     .emergencia .sub { font-size: 0.85rem; opacity: 0.9; }
+    .escuta-links { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    @media (max-width: 600px) { .escuta-links { grid-template-columns: 1fr; } }
+    .escuta-links a {
+      display: block;
+      padding: 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      text-align: center;
+      font-weight: bold;
+    }
+    .escuta-links a.sdr { background: var(--moss); color: var(--paper); }
+    .escuta-links a.dmr { background: var(--brass); color: var(--ink); }
   </style>
 </head>
 <body>
@@ -115,6 +127,17 @@
         <p><strong>Chamada local / regional</strong> — FM Simplex</p>
         <p class="sub">Uso comum no Nordeste para contato direto sem repetidora.</p>
       </div>
+
+      <h3>Radio Escuta Online</h3>
+      <div class="escuta-links">
+        <a class="sdr" href="http://py7nmcaruarupe.ddns.net:81/" target="_blank">
+          WebSDR Caruaru PE (VHF)<br><small>Sintonize 146.520 ou outras do PE</small>
+        </a>
+        <a class="dmr" href="https://hose.brandmeister.network/" target="_blank">
+          BrandMeister Hose (DMR)<br><small>TG 724193 – Emergência</small>
+        </a>
+      </div>
+      <p class="note">No WebSDR de Caruaru selecione a banda <strong>VHF-1</strong> e sintonize 146.520 MHz (modo FM). Status pode variar; confira também <a href="https://www.websdr.com.br/" target="_blank">websdr.com.br</a>.</p>
 
       <h3>VHF (2 m)</h3>
       <table>
