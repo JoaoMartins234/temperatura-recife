@@ -23,10 +23,36 @@
       max-width: 720px;
       margin: 0 auto;
     }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--brass);
+    }
+    header svg {
+      flex-shrink: 0;
+    }
+    header .brand {
+      display: flex;
+      flex-direction: column;
+    }
+    header .brand-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--moss);
+      margin: 0;
+      letter-spacing: 0.02em;
+    }
+    header .brand-sub {
+      font-size: 0.85rem;
+      color: var(--brass);
+      margin: 0;
+    }
     h1 {
       color: var(--moss);
-      border-bottom: 2px solid var(--brass);
-      padding-bottom: 0.5rem;
+      margin-top: 0;
     }
     .current {
       background: white;
@@ -82,7 +108,19 @@
 </head>
 <body>
   <div class="container">
-    <h1>Temperatura em Recife</h1>
+    <header>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="72" height="72" aria-label="Monograma Martins Engenharia">
+        <circle cx="60" cy="60" r="56" fill="none" stroke="#1B4334" stroke-width="4"/>
+        <circle cx="60" cy="60" r="50" fill="#F3EFE6"/>
+        <text x="60" y="78" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="bold" fill="#1B4334">M</text>
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#9A7344" stroke-width="1.5" opacity="0.6"/>
+      </svg>
+      <div class="brand">
+        <p class="brand-name">Martins Engenharia</p>
+        <p class="brand-sub">Temperatura em Recife</p>
+      </div>
+    </header>
+
     <p>Dashboard atualizado automaticamente a cada hora.</p>
 
     <div id="aviso" class="aviso" style="display:none;"></div>
@@ -130,7 +168,6 @@
           upd.textContent = 'Atualizado em: ' + d.toLocaleString('pt-BR', { timeZone: 'America/Recife' });
         }
 
-        // Aviso se a fonte não for INMET
         const aviso = document.getElementById('aviso');
         if (data.fonte && !data.fonte.includes('INMET')) {
           aviso.textContent = 'Nota: temperatura atual via ' + data.fonte + ' (INMET não disponível ou sem token).';
