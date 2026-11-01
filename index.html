@@ -392,7 +392,6 @@
         .addTo(mapa).bindPopup('<strong>Você está aqui</strong><br>Localização de emergência');
       userMarker.openPopup();
 
-      // Find nearest
       let nearest = null;
       let minDist = Infinity;
       estacoes.forEach(e => {
@@ -417,10 +416,10 @@
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
         const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+        const alertaUrl = 'https://joaomartins234.github.io/temperatura-recife/alerta.html';
 
         mostrarNoMapa(lat, lng);
 
-        // Nearest station info
         let nearest = null;
         let minDist = Infinity;
         estacoes.forEach(e => {
@@ -435,13 +434,15 @@
         document.getElementById('geo-info').innerHTML = `
           <strong>Localização obtida</strong><br>
           ${nearest ? nearest.nome + ' a ' + minDist.toFixed(1) + ' km (' + dir + ')' : ''}<br>
-          <a href="${mapsUrl}" target="_blank">Abrir no Google Maps</a>
+          <a href="${mapsUrl}" target="_blank">Abrir no Google Maps</a><br>
+          <a href="${alertaUrl}" target="_blank">🔊 Ouvir alarme sonoro</a>
         `;
 
-        // Prepare and open email
         const assunto = encodeURIComponent('🚨 EMERGÊNCIA - Minha localização');
         const corpo = encodeURIComponent(
           'EMERGÊNCIA CLIMÁTICA / SITUAÇÃO DE RISCO\n\n' +
+          '🔊 CLIQUE PARA OUVIR O ALARME SONORO:\n' +
+          alertaUrl + '\n\n' +
           'Estou na seguinte localização:\n' +
           mapsUrl + '\n\n' +
           'Coordenadas: ' + lat.toFixed(6) + ', ' + lng.toFixed(6) + '\n' +
