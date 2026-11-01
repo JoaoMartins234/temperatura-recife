@@ -21,95 +21,51 @@
       padding: 2rem;
       line-height: 1.5;
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    .container { max-width: 900px; margin: 0 auto; }
     header {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
+      display: flex; align-items: center; gap: 1.25rem;
+      margin-bottom: 1.5rem; padding-bottom: 1rem;
       border-bottom: 2px solid var(--brass);
     }
     header svg { flex-shrink: 0; }
-    header .brand-sub {
-      font-size: 0.85rem;
-      color: var(--brass);
-      margin: 0.25rem 0 0;
-    }
+    header .brand-sub { font-size: 0.85rem; color: var(--brass); margin: 0.25rem 0 0; }
     h1, h2, h3 { color: var(--moss); margin-top: 0; }
     .current {
-      background: white;
-      border: 1px solid var(--brass);
-      border-radius: 8px;
+      background: white; border: 1px solid var(--brass);
+      border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; text-align: center;
+    }
+    .temp { font-size: 4rem; font-weight: bold; color: var(--moss); margin: 0.5rem 0; }
+    .fonte { font-size: 0.9rem; color: #666; margin-top: 1rem; }
+    .previsao { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .dia { background: white; border: 1px solid #ddd; border-radius: 6px; padding: 1rem; text-align: center; }
+    .dia h3 { margin: 0 0 0.5rem; color: var(--moss); font-size: 1rem; }
+    .updated { text-align: center; font-size: 0.85rem; color: #888; margin-top: 2rem; }
+    .aviso { background: #fff3cd; border-left: 4px solid var(--brass); padding: 0.75rem 1rem; margin: 1rem 0; font-size: 0.9rem; }
+    .radio-section { margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid var(--brass); }
+    .radio-section table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.9rem; background: white; border-radius: 6px; overflow: hidden; }
+    .radio-section th, .radio-section td { padding: 0.6rem 0.5rem; text-align: left; border-bottom: 1px solid #eee; }
+    .radio-section th { background: var(--moss); color: var(--paper); font-weight: 600; }
+    .note { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
+    #mapa { height: 450px; width: 100%; border-radius: 8px; border: 1px solid var(--brass); margin: 1.5rem 0; }
+    .leaflet-popup-content { font-family: Georgia, serif; }
+    .emergencia {
+      background: #c0392b;
+      color: white;
+      border-radius: 10px;
       padding: 1.5rem;
       margin: 1.5rem 0;
       text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    .temp {
-      font-size: 4rem;
+    .emergencia h3 { color: white; margin: 0 0 0.5rem; font-size: 1.4rem; }
+    .freq-grande {
+      font-size: 2.8rem;
       font-weight: bold;
-      color: var(--moss);
+      letter-spacing: 1px;
       margin: 0.5rem 0;
     }
-    .fonte { font-size: 0.9rem; color: #666; margin-top: 1rem; }
-    .previsao {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
-    .dia {
-      background: white;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 1rem;
-      text-align: center;
-    }
-    .dia h3 { margin: 0 0 0.5rem; color: var(--moss); font-size: 1rem; }
-    .updated { text-align: center; font-size: 0.85rem; color: #888; margin-top: 2rem; }
-    .aviso {
-      background: #fff3cd;
-      border-left: 4px solid var(--brass);
-      padding: 0.75rem 1rem;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-    }
-    .radio-section {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 2px solid var(--brass);
-    }
-    .radio-section table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-      background: white;
-      border-radius: 6px;
-      overflow: hidden;
-    }
-    .radio-section th, .radio-section td {
-      padding: 0.6rem 0.5rem;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-    .radio-section th {
-      background: var(--moss);
-      color: var(--paper);
-      font-weight: 600;
-    }
-    .note { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
-    #mapa {
-      height: 450px;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid var(--brass);
-      margin: 1.5rem 0;
-    }
-    .leaflet-popup-content { font-family: Georgia, serif; }
+    .emergencia p { margin: 0.4rem 0; font-size: 0.95rem; }
+    .emergencia .sub { font-size: 0.85rem; opacity: 0.9; }
   </style>
 </head>
 <body>
@@ -150,6 +106,16 @@
       <h2>Frequências de Radioamadores — PE / Nordeste</h2>
       <p>Principais repetidoras ativas da URPE (União de Radioamadores de Pernambuco – PY7URP). Úteis em emergências climáticas quando redes convencionais falham.</p>
 
+      <div class="emergencia">
+        <h3>🚨 FREQUÊNCIAS DE EMERGÊNCIA</h3>
+        <div class="freq-grande">146.520 MHz</div>
+        <p><strong>Frequência Nacional de Chamada (FNC)</strong> — FM Simplex</p>
+        <p class="sub">Ponto de encontro nacional. Use apenas para chamada inicial em emergência. Depois mude para outra frequência.</p>
+        <div class="freq-grande" style="font-size:2rem; margin-top:1rem;">145.500 MHz</div>
+        <p><strong>Chamada local / regional</strong> — FM Simplex</p>
+        <p class="sub">Uso comum no Nordeste para contato direto sem repetidora.</p>
+      </div>
+
       <h3>VHF (2 m)</h3>
       <table>
         <thead>
@@ -177,8 +143,8 @@
         </tbody>
       </table>
 
-      <p class="note"><strong>Simplex úteis:</strong> 146.520 MHz (chamada nacional) · 145.500 MHz (local/regional).<br>
-      Fonte: URPE. Licença COER Anatel obrigatória. Confirme status atual por scan ou contato com o clube.</p>
+      <p class="note"><strong>Simplex úteis:</strong> 146.520 MHz (FNC – emergência nacional) · 145.500 MHz (local/regional).<br>
+      Fonte: URPE / LABRE / Anatel. Licença COER obrigatória. Em emergência real, monitore a 146.520 e chame com clareza.</p>
 
       <h3>Mapa das Estações</h3>
       <div id="mapa"></div>
@@ -192,11 +158,9 @@
         const resp = await fetch('temperatura.json?t=' + Date.now());
         if (!resp.ok) throw new Error('Arquivo não encontrado');
         const data = await resp.json();
-
         document.getElementById('temp').textContent = (data.temperatura_atual ?? '--') + '°C';
         document.getElementById('condicao').textContent = data.condicao || '—';
         document.getElementById('fonte').textContent = 'Fonte: ' + (data.fonte || 'desconhecida');
-
         const prev = document.getElementById('previsao');
         prev.innerHTML = '';
         (data.previsao || []).forEach(dia => {
@@ -206,13 +170,11 @@
           div.innerHTML = `<h3>${dataFmt}</h3><div>${dia.condicao || ''}</div><div><strong>${dia.temp_max ?? '—'}°</strong> / ${dia.temp_min ?? '—'}°</div>`;
           prev.appendChild(div);
         });
-
         const upd = document.getElementById('updated');
         if (data.atualizado_em) {
           const d = new Date(data.atualizado_em);
           upd.textContent = 'Atualizado em: ' + d.toLocaleString('pt-BR', { timeZone: 'America/Recife' });
         }
-
         const aviso = document.getElementById('aviso');
         if (data.fonte && !data.fonte.includes('INMET')) {
           aviso.textContent = 'Nota: temperatura atual via ' + data.fonte + ' (INMET não disponível ou sem token).';
