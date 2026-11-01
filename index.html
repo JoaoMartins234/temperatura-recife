@@ -96,6 +96,31 @@
     .aereo { background: #1a4a7a; }
     .maritimo { background: #0d5c63; }
     .aereo h3, .maritimo h3 { color: white; margin: 0 0 0.4rem; }
+    .btn-emergencia {
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      margin: 1.5rem auto;
+      padding: 1.2rem 1.5rem;
+      background: #c0392b;
+      color: white;
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(192,57,43,0.4);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+    }
+    .btn-emergencia:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(192,57,43,0.5);
+    }
+    .btn-emergencia:active {
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -119,6 +144,8 @@
 
     <p>Dashboard de temperatura atualizado automaticamente a cada hora + rede de radioamadores para emergências climáticas.</p>
 
+    <a href="#emergencia" class="btn-emergencia">🚨 BOTÃO DE EMERGÊNCIA</a>
+
     <div id="aviso" class="aviso" style="display:none;"></div>
 
     <div class="current">
@@ -132,7 +159,7 @@
 
     <div class="updated" id="updated"></div>
 
-    <section class="radio-section">
+    <section class="radio-section" id="emergencia">
       <h2>Frequências de Radioamadores — PE / Nordeste</h2>
       <p>Principais repetidoras ativas da URPE (União de Radioamadores de Pernambuco – PY7URP). Úteis em emergências climáticas quando redes convencionais falham.</p>
 
