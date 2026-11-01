@@ -1,0 +1,43 @@
+name: Atualizar temperatura
+
+on:
+  schedule:
+    # A cada hora
+    - cron: '0 * * * *'
+  workflow_dispatch:  # Permite rodar manualmente
+
+permissions:
+  contents: write
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run script
+        env:
+          INMET_TOKEN: ${{ secrets.INMET_TOKEN }}
+          INMET_ESTACAO: ${{ vars.INMET_ESTACAO || 'A301' }}
+        run: python scripts/atualizar_temperatura.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add temperatura.json
+          if git diff --staged --quiet; then
+            echo "Nenhuma alteração em temperatura.json"
+          else
+            git commit -m "Atualiza temperatura.json [skip ci]"
+            git push
+          fi
