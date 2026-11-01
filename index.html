@@ -10,6 +10,7 @@
       --ink: #1A211C;
       --moss: #1B4334;
       --brass: #9A7344;
+      --blue: #1a4a7a;
     }
     body {
       font-family: Georgia, 'Times New Roman', serif;
@@ -34,21 +35,10 @@
     header svg {
       flex-shrink: 0;
     }
-    header .brand {
-      display: flex;
-      flex-direction: column;
-    }
-    header .brand-name {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--moss);
-      margin: 0;
-      letter-spacing: 0.02em;
-    }
     header .brand-sub {
       font-size: 0.85rem;
       color: var(--brass);
-      margin: 0;
+      margin: 0.25rem 0 0;
     }
     h1 {
       color: var(--moss);
@@ -109,14 +99,18 @@
 <body>
   <div class="container">
     <header>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="72" height="72" aria-label="Monograma Martins Engenharia">
-        <circle cx="60" cy="60" r="56" fill="none" stroke="#1B4334" stroke-width="4"/>
-        <circle cx="60" cy="60" r="50" fill="#F3EFE6"/>
-        <text x="60" y="78" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="56" font-weight="bold" fill="#1B4334">M</text>
-        <circle cx="60" cy="60" r="52" fill="none" stroke="#9A7344" stroke-width="1.5" opacity="0.6"/>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" width="200" height="58" aria-label="Logo Martins Engenharia">
+        <g transform="translate(8, 8)">
+          <polygon points="32,0 48,16 32,32 16,16" fill="#1a4a7a"/>
+          <polygon points="16,16 32,32 16,48 0,32" fill="#2a6cb0"/>
+          <polygon points="32,32 48,48 32,64 16,48" fill="#1a4a7a"/>
+          <polygon points="32,0 48,16 64,32 48,48 32,32" fill="#3d8fd4"/>
+          <polygon points="32,16 40,24 32,32 24,24" fill="#5aa8e8"/>
+        </g>
+        <text x="80" y="38" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#1a2a3a">Martins</text>
+        <text x="80" y="56" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="500" fill="#4a6a8a" letter-spacing="3.5">ENGENHARIA</text>
       </svg>
-      <div class="brand">
-        <p class="brand-name">Martins Engenharia</p>
+      <div>
         <p class="brand-sub">Temperatura em Recife</p>
       </div>
     </header>
