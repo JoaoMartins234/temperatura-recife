@@ -190,7 +190,7 @@
 
     <p>Dashboard de temperatura atualizado automaticamente a cada hora + rede de radioamadores para emergências climáticas.</p>
 
-    <button class="btn-emergencia" onclick="emergenciaCompleta()">🚨 BOTÃO DE EMERGÊNCIA</button>
+    <button class="btn-emergencia" onclick="emergenciaCompleta()">🚨 BOTÃO DE EMERGÊNCIA 🔑</button>
 
     <div id="aviso" class="aviso" style="display:none;"></div>
 
@@ -406,6 +406,12 @@
     }
 
     function emergenciaCompleta() {
+      const senha = prompt('🔑 Digite a senha para ativar a emergência:');
+      if (senha !== '1478') {
+        alert('Senha incorreta. Emergência não ativada.');
+        return;
+      }
+
       if (!navigator.geolocation) {
         alert('Geolocalização não suportada neste navegador.');
         return;
