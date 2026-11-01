@@ -80,6 +80,22 @@
     }
     .escuta-links a.dmr { background: var(--brass); color: var(--ink); }
     .escuta-links a.destaque { background: #1a4a7a; }
+    .aereo-maritimo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) { .aereo-maritimo { grid-template-columns: 1fr; } }
+    .aereo, .maritimo {
+      border-radius: 10px;
+      padding: 1.2rem;
+      text-align: center;
+      color: white;
+    }
+    .aereo { background: #1a4a7a; }
+    .maritimo { background: #0d5c63; }
+    .aereo h3, .maritimo h3 { color: white; margin: 0 0 0.4rem; }
   </style>
 </head>
 <body>
@@ -130,17 +146,34 @@
         <p class="sub">Uso comum no Nordeste para contato direto sem repetidora.</p>
       </div>
 
+      <div class="aereo-maritimo">
+        <div class="aereo">
+          <h3>✈️ ESCUTA AÉREA DE RESGATE</h3>
+          <div class="freq-grande" style="font-size:2.2rem;">121.500 MHz</div>
+          <p><strong>Emergência internacional aeronáutica</strong> — AM</p>
+          <p class="sub">Monitorada por ATC e aeronaves. Use apenas em emergência real (MAYDAY / PAN PAN).</p>
+          <p style="margin-top:0.6rem; font-size:0.85rem;">Também: 123.100 MHz (cena SAR)</p>
+        </div>
+        <div class="maritimo">
+          <h3>🛥️ ESCUTA MARÍTIMA</h3>
+          <div class="freq-grande" style="font-size:2.2rem;">156.800 MHz</div>
+          <p><strong>Canal 16 VHF</strong> — FM</p>
+          <p class="sub">Socorro, segurança e chamada internacional. Monitorado pela Marinha e estações costeiras.</p>
+          <p style="margin-top:0.6rem; font-size:0.85rem;">DSC: 156.525 MHz (Canal 70)</p>
+        </div>
+      </div>
+
       <h3>Radio Escuta Online</h3>
       <div class="escuta-links">
         <a class="destaque" href="http://sdr.labre-pe.org.br/" target="_blank">OpenWebRX LABRE-PE<br><small>Recife</small></a>
         <a class="sdr" href="http://py7nmcaruarupe.ddns.net:81/" target="_blank">WebSDR Caruaru PE<br><small>VHF + HF</small></a>
-        <a class="sdr" href="http://appr.org.br:8901/" target="_blank">WebSDR Pardinho SP<br><small>Melhor · VHF</small></a>
+        <a class="sdr" href="http://appr.org.br:8901/" target="_blank">WebSDR Pardinho SP<br><small>Melhor · VHF / Aéreo</small></a>
         <a class="sdr" href="http://orlandia.sdr.net.br:9001/" target="_blank">WebSDR Orlândia SP</a>
         <a class="sdr" href="http://portolucena.sdr.net.br:9001/" target="_blank">WebSDR Porto Lucena RS</a>
         <a class="sdr" href="http://alfredomarcondes.sdr.net.br:37001/" target="_blank">WebSDR Alfredo Marcondes SP</a>
         <a class="dmr" href="https://hose.brandmeister.network/" target="_blank">BrandMeister Hose<br><small>DMR · TG 724193</small></a>
       </div>
-      <p class="note">Destaque para o receptor da LABRE-PE em Recife e o de Caruaru (VHF). Pardinho (SP) é um dos mais completos do Brasil. Status pode variar. Lista completa: <a href="https://www.websdr.com.br/" target="_blank">websdr.com.br</a>.</p>
+      <p class="note">Para 121.500 MHz e faixa aérea, tente o WebSDR de Pardinho (SP). Para Canal 16 marítimo, use receptores que cubram 156–162 MHz (status varia). Lista completa: <a href="https://www.websdr.com.br/" target="_blank">websdr.com.br</a>.</p>
 
       <h3>VHF (2 m)</h3>
       <table>
