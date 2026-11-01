@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🚨 ALERTA DE EMERGÊNCIA</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #c0392b; color: white; text-align: center; padding: 2rem; }
+    h1 { font-size: 2.5rem; }
+    button { font-size: 1.5rem; padding: 1rem 2rem; margin: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>🚨 ALERTA DE EMERGÊNCIA</h1>
+  <p>Localização recebida. Ouça o sinal e verifique o mapa.</p>
+  <button onclick="tocarAlarme()">🔊 Tocar Alarme</button>
+  <button onclick="pararAlarme()">Parar</button>
+  <p id="status">Clique para ouvir o sinal sonoro.</p>
+  <script>
+    let audioCtx, oscillator, gainNode, interval;
+    function tocarAlarme() {
+      if (audioCtx) pararAlarme();
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      oscillator = audioCtx.createOscillator();
+      gainNode = audioCtx.createGain();
+      oscillator.type = 'square';
+      oscillator.frequency.setValueAtTime(800, audioCtx.currentTime);
+      gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      oscillator.start();
+      let on = true;
+      interval = setInterval(() => {
+        gainNode.gain.setValueAtTime(on ? 0.3 : 0, audioCtx.currentTime);
+        on = !on;
+      }, 300);
+      document.getElementById('status').textContent = 'Alarme tocando...';
+    }
+    function pararAlarme() {
+      if (interval) clearInterval(interval);
+      if (oscillator) oscillator.stop();
+      if (audioCtx) audioCtx.close();
+      audioCtx = oscillator = gainNode = interval = null;
+      document.getElementById('status').textContent = 'Alarme parado.';
+    }
+    window.addEventListener('load', () => {
+      setTimeout(tocarAlarme, 500);
+    });
+  </script>
+</body>
+</html>
