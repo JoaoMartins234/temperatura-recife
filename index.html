@@ -66,18 +66,20 @@
     }
     .emergencia p { margin: 0.4rem 0; font-size: 0.95rem; }
     .emergencia .sub { font-size: 0.85rem; opacity: 0.9; }
-    .escuta-links { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
-    @media (max-width: 600px) { .escuta-links { grid-template-columns: 1fr; } }
+    .escuta-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; margin: 1rem 0; }
     .escuta-links a {
       display: block;
-      padding: 1rem;
+      padding: 0.9rem 0.6rem;
       border-radius: 8px;
       text-decoration: none;
       text-align: center;
       font-weight: bold;
+      font-size: 0.9rem;
+      background: var(--moss);
+      color: var(--paper);
     }
-    .escuta-links a.sdr { background: var(--moss); color: var(--paper); }
     .escuta-links a.dmr { background: var(--brass); color: var(--ink); }
+    .escuta-links a.destaque { background: #1a4a7a; }
   </style>
 </head>
 <body>
@@ -130,14 +132,15 @@
 
       <h3>Radio Escuta Online</h3>
       <div class="escuta-links">
-        <a class="sdr" href="http://py7nmcaruarupe.ddns.net:81/" target="_blank">
-          WebSDR Caruaru PE (VHF)<br><small>Sintonize 146.520 ou outras do PE</small>
-        </a>
-        <a class="dmr" href="https://hose.brandmeister.network/" target="_blank">
-          BrandMeister Hose (DMR)<br><small>TG 724193 – Emergência</small>
-        </a>
+        <a class="destaque" href="http://sdr.labre-pe.org.br/" target="_blank">OpenWebRX LABRE-PE<br><small>Recife</small></a>
+        <a class="sdr" href="http://py7nmcaruarupe.ddns.net:81/" target="_blank">WebSDR Caruaru PE<br><small>VHF + HF</small></a>
+        <a class="sdr" href="http://appr.org.br:8901/" target="_blank">WebSDR Pardinho SP<br><small>Melhor · VHF</small></a>
+        <a class="sdr" href="http://orlandia.sdr.net.br:9001/" target="_blank">WebSDR Orlândia SP</a>
+        <a class="sdr" href="http://portolucena.sdr.net.br:9001/" target="_blank">WebSDR Porto Lucena RS</a>
+        <a class="sdr" href="http://alfredomarcondes.sdr.net.br:37001/" target="_blank">WebSDR Alfredo Marcondes SP</a>
+        <a class="dmr" href="https://hose.brandmeister.network/" target="_blank">BrandMeister Hose<br><small>DMR · TG 724193</small></a>
       </div>
-      <p class="note">No WebSDR de Caruaru selecione a banda <strong>VHF-1</strong> e sintonize 146.520 MHz (modo FM). Status pode variar; confira também <a href="https://www.websdr.com.br/" target="_blank">websdr.com.br</a>.</p>
+      <p class="note">Destaque para o receptor da LABRE-PE em Recife e o de Caruaru (VHF). Pardinho (SP) é um dos mais completos do Brasil. Status pode variar. Lista completa: <a href="https://www.websdr.com.br/" target="_blank">websdr.com.br</a>.</p>
 
       <h3>VHF (2 m)</h3>
       <table>
