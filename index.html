@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Temperatura Recife — Martins Engenharia</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     :root {
       --paper: #F3EFE6;
@@ -21,7 +22,7 @@
       line-height: 1.5;
     }
     .container {
-      max-width: 720px;
+      max-width: 900px;
       margin: 0 auto;
     }
     header {
@@ -32,18 +33,13 @@
       padding-bottom: 1rem;
       border-bottom: 2px solid var(--brass);
     }
-    header svg {
-      flex-shrink: 0;
-    }
+    header svg { flex-shrink: 0; }
     header .brand-sub {
       font-size: 0.85rem;
       color: var(--brass);
       margin: 0.25rem 0 0;
     }
-    h1 {
-      color: var(--moss);
-      margin-top: 0;
-    }
+    h1, h2, h3 { color: var(--moss); margin-top: 0; }
     .current {
       background: white;
       border: 1px solid var(--brass);
@@ -58,16 +54,12 @@
       color: var(--moss);
       margin: 0.5rem 0;
     }
-    .fonte {
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 1rem;
-    }
+    .fonte { font-size: 0.9rem; color: #666; margin-top: 1rem; }
     .previsao {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 1rem;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
     .dia {
       background: white;
@@ -76,17 +68,8 @@
       padding: 1rem;
       text-align: center;
     }
-    .dia h3 {
-      margin: 0 0 0.5rem;
-      color: var(--moss);
-      font-size: 1rem;
-    }
-    .updated {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #888;
-      margin-top: 2rem;
-    }
+    .dia h3 { margin: 0 0 0.5rem; color: var(--moss); font-size: 1rem; }
+    .updated { text-align: center; font-size: 0.85rem; color: #888; margin-top: 2rem; }
     .aviso {
       background: #fff3cd;
       border-left: 4px solid var(--brass);
@@ -94,6 +77,39 @@
       margin: 1rem 0;
       font-size: 0.9rem;
     }
+    .radio-section {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid var(--brass);
+    }
+    .radio-section table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      background: white;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .radio-section th, .radio-section td {
+      padding: 0.6rem 0.5rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+    .radio-section th {
+      background: var(--moss);
+      color: var(--paper);
+      font-weight: 600;
+    }
+    .note { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
+    #mapa {
+      height: 450px;
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--brass);
+      margin: 1.5rem 0;
+    }
+    .leaflet-popup-content { font-family: Georgia, serif; }
   </style>
 </head>
 <body>
@@ -111,11 +127,11 @@
         <text x="80" y="56" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="500" fill="#4a6a8a" letter-spacing="3.5">ENGENHARIA</text>
       </svg>
       <div>
-        <p class="brand-sub">Temperatura em Recife</p>
+        <p class="brand-sub">Temperatura em Recife + Radioamadores PE</p>
       </div>
     </header>
 
-    <p>Dashboard atualizado automaticamente a cada hora.</p>
+    <p>Dashboard de temperatura atualizado automaticamente a cada hora + rede de radioamadores para emergências climáticas.</p>
 
     <div id="aviso" class="aviso" style="display:none;"></div>
 
@@ -129,8 +145,47 @@
     <div class="previsao" id="previsao"></div>
 
     <div class="updated" id="updated"></div>
+
+    <section class="radio-section">
+      <h2>Frequências de Radioamadores — PE / Nordeste</h2>
+      <p>Principais repetidoras ativas da URPE (União de Radioamadores de Pernambuco – PY7URP). Úteis em emergências climáticas quando redes convencionais falham.</p>
+
+      <h3>VHF (2 m)</h3>
+      <table>
+        <thead>
+          <tr><th>Frequência</th><th>Indicativo</th><th>Local</th><th>Tipo</th><th>Offset / Subtom</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>145.390</td><td>PY7VHF</td><td>Tiúma</td><td>DMR</td><td>DUP- 0,6 MHz · CC 1</td></tr>
+          <tr><td>147.240</td><td>PY7JMN</td><td>Serra do Pirauá</td><td>Analógica</td><td>DUP+ 0,6 MHz · 100 Hz</td></tr>
+          <tr><td>147.210</td><td>PY7SO</td><td>Olinda</td><td>Analógica</td><td>DUP+ 0,6 MHz · 67 Hz</td></tr>
+          <tr><td>147.270</td><td>PY7YY</td><td>Taquaritinga do Norte</td><td>Analógica</td><td>DUP+ 0,6 MHz · 100 Hz</td></tr>
+          <tr><td>146.890</td><td>PY7AZ</td><td>Matriz da Luz</td><td>Analógica</td><td>DUP- 0,6 MHz</td></tr>
+          <tr><td>145.410</td><td>PY7LO</td><td>Aldeia</td><td>Analógica</td><td>DUP- 0,6 MHz · 100 Hz</td></tr>
+        </tbody>
+      </table>
+
+      <h3>UHF (70 cm)</h3>
+      <table>
+        <thead>
+          <tr><th>Frequência</th><th>Indicativo</th><th>Local</th><th>Tipo</th><th>Offset / Subtom</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>439.650</td><td>PY7UHF</td><td>Ibura</td><td>DMR</td><td>DUP- 5,0 MHz · CC 1</td></tr>
+          <tr><td>439.750</td><td>PY7OR</td><td>Jaboatão dos Guararapes</td><td>Analógica</td><td>DUP- 5,0 MHz · 100 Hz</td></tr>
+          <tr><td>439.950</td><td>PY7AK</td><td>Taquaritinga do Norte</td><td>Analógica</td><td>DUP- 5,0 MHz · 100 Hz</td></tr>
+        </tbody>
+      </table>
+
+      <p class="note"><strong>Simplex úteis:</strong> 146.520 MHz (chamada nacional) · 145.500 MHz (local/regional).<br>
+      Fonte: URPE. Licença COER Anatel obrigatória. Confirme status atual por scan ou contato com o clube.</p>
+
+      <h3>Mapa das Estações</h3>
+      <div id="mapa"></div>
+    </section>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     async function carregar() {
       try {
@@ -148,11 +203,7 @@
           const div = document.createElement('div');
           div.className = 'dia';
           const dataFmt = new Date(dia.data + 'T12:00:00').toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric', month: 'short' });
-          div.innerHTML = `
-            <h3>${dataFmt}</h3>
-            <div>${dia.condicao || ''}</div>
-            <div><strong>${dia.temp_max ?? '—'}°</strong> / ${dia.temp_min ?? '—'}°</div>
-          `;
+          div.innerHTML = `<h3>${dataFmt}</h3><div>${dia.condicao || ''}</div><div><strong>${dia.temp_max ?? '—'}°</strong> / ${dia.temp_min ?? '—'}°</div>`;
           prev.appendChild(div);
         });
 
@@ -173,6 +224,27 @@
       }
     }
     carregar();
+
+    const mapa = L.map('mapa').setView([-8.05, -34.95], 9);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(mapa);
+
+    const estacoes = [
+      { lat: -7.976498, lng: -35.076892, nome: 'PY7VHF', freq: '145.390', local: 'Tiúma', tipo: 'DMR VHF' },
+      { lat: -7.497837, lng: -35.509364, nome: 'PY7JMN', freq: '147.240', local: 'Serra do Pirauá', tipo: 'Analógica VHF' },
+      { lat: -7.9939, lng: -34.8597, nome: 'PY7SO', freq: '147.210', local: 'Olinda', tipo: 'Analógica VHF' },
+      { lat: -7.9028, lng: -36.0442, nome: 'PY7YY / PY7AK', freq: '147.270 / 439.950', local: 'Taquaritinga do Norte', tipo: 'VHF + UHF' },
+      { lat: -8.03757, lng: -35.100971, nome: 'PY7AZ', freq: '146.890', local: 'Matriz da Luz', tipo: 'Analógica VHF' },
+      { lat: -8.000781, lng: -34.970205, nome: 'PY7LO', freq: '145.410', local: 'Aldeia', tipo: 'Analógica VHF' },
+      { lat: -8.116, lng: -34.94, nome: 'PY7UHF', freq: '439.650', local: 'Ibura', tipo: 'DMR UHF' },
+      { lat: -8.190818, lng: -34.920513, nome: 'PY7OR', freq: '439.750', local: 'Jaboatão dos Guararapes', tipo: 'Analógica UHF' }
+    ];
+
+    estacoes.forEach(e => {
+      L.marker([e.lat, e.lng]).addTo(mapa)
+        .bindPopup(`<strong>${e.nome}</strong><br>${e.freq} MHz<br>${e.local}<br>${e.tipo}`);
+    });
   </script>
 </body>
 </html>
