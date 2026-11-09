@@ -1,9 +1,9 @@
 {
-  "atualizado_em": "2026-11-08T17:07:28.692286-03:00",
+  "atualizado_em": "2026-11-08T21:27:46.228501-03:00",
   "fonte": "Open-Meteo",
-  "temperatura_atual": 28.4,
-  "condicao": "Céu limpo",
-  "weather_code": 0,
+  "temperatura_atual": 27.7,
+  "condicao": "Principalmente limpo",
+  "weather_code": 1,
   "previsao": [
     {
       "data": "2026-11-08",
