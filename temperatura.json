@@ -1,42 +1,42 @@
 {
-  "atualizado_em": "2026-11-21T02:24:34.852667-03:00",
+  "atualizado_em": "2026-11-21T11:06:00.475212-03:00",
   "fonte": "Open-Meteo",
-  "temperatura_atual": 26.1,
-  "condicao": "Céu limpo",
-  "weather_code": 0,
+  "temperatura_atual": 31.4,
+  "condicao": "Parcialmente nublado",
+  "weather_code": 2,
   "previsao": [
     {
       "data": "2026-11-21",
-      "temp_max": 31.3,
-      "temp_min": 25.4,
+      "temp_max": 31.4,
+      "temp_min": 25.3,
       "condicao": "Garoa leve",
       "weather_code": 51
     },
     {
       "data": "2026-11-22",
-      "temp_max": 31.2,
-      "temp_min": 26.3,
+      "temp_max": 31.4,
+      "temp_min": 26.9,
       "condicao": "Garoa leve",
       "weather_code": 51
     },
     {
       "data": "2026-11-23",
-      "temp_max": 31.5,
-      "temp_min": 26.6,
-      "condicao": "Garoa moderada",
-      "weather_code": 53
+      "temp_max": 31.2,
+      "temp_min": 26.4,
+      "condicao": "Garoa leve",
+      "weather_code": 51
     },
     {
       "data": "2026-11-24",
-      "temp_max": 30.8,
-      "temp_min": 26.0,
-      "condicao": "Garoa moderada",
-      "weather_code": 53
+      "temp_max": 31.4,
+      "temp_min": 26.5,
+      "condicao": "Garoa leve",
+      "weather_code": 51
     },
     {
       "data": "2026-11-25",
-      "temp_max": 30.8,
-      "temp_min": 25.9,
+      "temp_max": 30.3,
+      "temp_min": 25.4,
       "condicao": "Garoa leve",
       "weather_code": 51
     }
